@@ -70,7 +70,7 @@ function Products() {
 
             }
         } catch (error) {
-            alert('Kindly Login')
+            console.log(error);
         }
 
     };
