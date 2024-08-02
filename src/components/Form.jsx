@@ -59,7 +59,11 @@ function Form() {
         try {
             const response = await Axios.post(
                 "https://flavourslabbackend.onrender.com/api/form/contactform",
-                formData
+                formData,{
+                    headers:{
+                        "authToken":localStorage.getItem("authToken")
+                    }
+                }
             );
             if (response.data.success) {
                 alert("Data inserted successfully");

@@ -56,6 +56,9 @@ function Resetpassword() {
             // API call
             const response = await Axios.post(`https://flavourslabbackend.onrender.com/api/auth/reset-password/${token}`, {
                 password,
+                headers:{
+                    "authToken":localStorage.getItem("authToken")
+                }
             });
 
             if (response.data.status) {

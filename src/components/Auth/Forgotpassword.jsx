@@ -31,6 +31,11 @@ function Forgotpassword() {
       // API call
       const response = await Axios.post('https://flavourslabbackend.onrender.com/api/auth/forgot', {
         email,
+
+      },{
+        headers:{
+          "authToken":localStorage.getItem("authToken")
+      }
       });
       if(response.data.error){
         alert("Email does not exist!");

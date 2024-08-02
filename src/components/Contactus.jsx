@@ -74,7 +74,11 @@ function Contactus() {
         try {
             const response = await Axios.post(
                 "https://flavourslabbackend.onrender.com/api/form/reservationform",
-                formData
+                formData,{
+                    headers:{
+                        "authToken":localStorage.getItem("authToken")
+                    }
+                }
             );
             console.log(response);
 
