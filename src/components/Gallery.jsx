@@ -23,7 +23,11 @@ function Gallery() {
     const [datas, setData] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:4000/api/gallery/fetchgallary')
+        Axios.get('http://localhost:4000/api/gallery/fetchgallary',{
+            headers:{
+                "authToken":localStorage.getItem("authToken"),
+            }
+        })
             .then((response) => {
                 setData(response.data);
                 console.log(datas)
