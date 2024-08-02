@@ -29,7 +29,7 @@ function Forgotpassword() {
       }
 
       // API call
-      const response = await Axios.post('http://localhost:4000/api/auth/forgot', {
+      const response = await Axios.post('https://flavourslabbackend.onrender.com/api/auth/forgot', {
         email,
       });
       if(response.data.error){

@@ -38,7 +38,7 @@ function Cart() {
         const getUser = async () => {
             try {
                 const response = await Axios.post(
-                    "http://localhost:4000/api/auth/getuser"
+                    "https://flavourslabbackend.onrender.com/api/auth/getuser"
                 );
                 if (response) {
                     const user = response.data;
@@ -87,7 +87,7 @@ function Cart() {
             });
         }
         try {
-            const response = await Axios.post('http://localhost:4000/api/orders/order', orderData)
+            const response = await Axios.post('https://flavourslabbackend.onrender.com/api/orders/order', orderData)
             if (response.data) {
                 console.log(response)
                 Swal.fire({
@@ -114,7 +114,7 @@ function Cart() {
         }
 
         try {
-            const res = await Axios.post('http://localhost:4000/api/coupon/verifycoupon', { coupon });
+            const res = await Axios.post('https://flavourslabbackend.onrender.com/api/coupon/verifycoupon', { coupon });
             console.log("Response from server:", res);
 
             if (res.data.error === "no coupon found") {

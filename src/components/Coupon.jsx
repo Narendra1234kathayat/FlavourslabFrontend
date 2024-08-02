@@ -17,7 +17,7 @@ function Coupon() {
         const fetchdata = async () => {
             try {
                 const res = await Axios.get(
-                    "http://localhost:4000/api/coupon/fetchcoupon"
+                    "https://flavourslabbackend.onrender.com/api/coupon/fetchcoupon"
                 );
                 console.log(res.data);
                 if (res.status === 200) {

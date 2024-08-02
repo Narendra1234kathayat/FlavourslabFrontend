@@ -58,7 +58,7 @@ function Form() {
 
         try {
             const response = await Axios.post(
-                "http://localhost:4000/api/form/contactform",
+                "https://flavourslabbackend.onrender.com/api/form/contactform",
                 formData
             );
             if (response.data.success) {

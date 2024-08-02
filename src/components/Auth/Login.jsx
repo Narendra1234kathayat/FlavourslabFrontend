@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie"
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +20,10 @@ function Login() {
     useEffect(() => {
         const handleVerify = async () => {
             try {
-                const res = await Axios.get('http://localhost:4000/api/auth/verify');
+                const res = await Axios.get('https://flavourslabbackend.onrender.com/api/auth/verify',{
+                    withCredentials:true
+
+                });
                 if (res.data.status) {
                     navigate('/');
                 } else {
@@ -30,7 +34,7 @@ function Login() {
             }
         };
         handleVerify();
-    }, [navigate]);
+    }, []);
 
 
 
@@ -43,10 +47,17 @@ function Login() {
         }
 
         try {
-            const response = await Axios.post("http://localhost:4000/api/auth/login", {
+            const response = await Axios.post("https://flavourslabbackend.onrender.com/api/auth/login", {
                 email,
                 password,
+            },{
+                withCredentials: true,
             });
+            console.log(response.data.authToken,"fdsaf")
+            const tokens=response.data.authToken
+            Cookies.set("token",tokens)
+           
+            localStorage.setItem("accesstoken",tokens)
 
             if (response.data.error === "Invalid credentials") {
                 Swal.fire({

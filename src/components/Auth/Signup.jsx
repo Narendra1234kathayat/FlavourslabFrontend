@@ -63,20 +63,20 @@ function Signup() {
 
 
     try {
-      const emailCheck = await Axios.post('http://localhost:4000/api/auth/check-email', { email });
+      const emailCheck = await Axios.post('https://flavourslabbackend.onrender.com/api/auth/check-email', { email });
       // console.log(emailCheck)
       if (emailCheck.data.exists) {
         alert("Email Already Exists!");
         return;
       }
 
-      const numberCheck = await Axios.post('http://localhost:4000/api/auth/check-number', { number });
+      const numberCheck = await Axios.post('https://flavourslabbackend.onrender.com/api/auth/check-number', { number });
       if (numberCheck.data.exists) {
         alert("Number Already Exists!");
         return;
       }
 
-      const response = await Axios.post('http://localhost:4000/api/auth/signup', {
+      const response = await Axios.post('https://flavourslabbackend.onrender.com/api/auth/signup', {
         name,
         email,
         password,

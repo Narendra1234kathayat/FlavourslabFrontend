@@ -8,7 +8,7 @@ function Order() {
     const [orders, SetOrder] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:4000/api/orders/fetchorder')
+        Axios.get('https://flavourslabbackend.onrender.com/api/orders/fetchorder')
             .then((response) => {
                 if (response.data) {
                     SetOrder(response.data);

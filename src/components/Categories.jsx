@@ -50,7 +50,7 @@ function Categories() {
     // Backend code
 
     useEffect(() => {
-        Axios.get("http://localhost:4000/api/category/fetchcategory")
+        Axios.get("https://flavourslabbackend.onrender.com/api/category/fetchcategory")
             .then((response) => {
                
                 const shuffledData = response.data.sort(() => Math.random() - 0.5);
@@ -259,7 +259,7 @@ function Categories() {
                                 <div className="border rounded-3 foodie">
                                     <div className="text-center">
                                         <img
-                                            src={`http://localhost:4000/Multer/${data.image}`}
+                                            src={`https://flavourslabbackend.onrender.com/Multer/${data.image}`}
                                             alt="category1"
                                             className="img-fluid"
                                         />

@@ -31,7 +31,7 @@ function Products() {
             try {
                 // Make API request to fetch products based on type
                 const response = await Axios.post(
-                    `http://localhost:4000/api/product/fetchproducts/${type}`
+                    `https://flavourslabbackend.onrender.com/api/product/fetchproducts/${type}`
                 );
                 setProducts(response.data);
 
@@ -46,7 +46,7 @@ function Products() {
 
         try {
             const response = await Axios.get(
-                "http://localhost:4000/api/auth/verify"
+                "https://flavourslabbackend.onrender.com/api/auth/verify"
             );
             console.log(response.data)
             // console.log(response)

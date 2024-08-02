@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import Swal from 'sweetalert2';
-
+import Cookies from "js-cookie"
 // CSS
 import "../assets/css/style.css";
 
@@ -27,33 +27,43 @@ function Header() {
     const navigate = useNavigate();
     const count = useSelector((state) => state.cart)
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const response = await Axios.post(
-                    "http://localhost:4000/api/auth/getuser"
-                );
-                if (response) {
-                    const user = response.data;
-                    setUserData(user);
-                    // console.log(user);
-
-                    // Capitalize the first letter of the name of user
-                    const capitalizedFirstName = user.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "Sign in";
-                    setLogin(capitalizedFirstName); // Set login state with capitalized first letter
-                } else {
-                    console.log("Failed to fetch user data");
+    const getUser = async () => {
+        try {
+            const response = await Axios.post(
+                "https://flavourslabbackend.onrender.com/api/auth/getuser",{
+                    withCredentials:true,
+                    headers: {
+                        Authorization:Cookies.get("token")
+                    }
                 }
-            } catch (error) {
-                // console.log("Error fetching user data:", error);
-            }
-        };
+            );
+            if (response) {
+                
+                const user = response.data;
+                setUserData(user);
+                console.log(user);
+                
 
-        getUser(); // Always fetch user data on component mount
-    }, [user]); // Update userData whenever user changes
+                // Capitalize the first letter of the name of user
+                const capitalizedFirstName = user.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "Sign in";
+                setLogin(capitalizedFirstName); // Set login state with capitalized first letter
+            } else {
+                console.log("Failed to fetch user data");
+            }
+        } catch (error) {
+            console.log("Error fetching user data:", error);
+        }
+    };
+    useEffect(() => {
+       
+
+       if(localStorage.getItem("token") || localStorage.getItem("accessToken")){
+           getUser()
+       } // Always fetch user data on component mount
+    }, [localStorage.getItem("token")]); // Update userData whenever user changes
 
     const handleLogout = async () => {
-        await Axios.get('http://localhost:4000/api/auth/logout')
+        await Axios.get('https://flavourslabbackend.onrender.com/api/auth/logout')
             .then(res => {
                 if (res.data.status) {
                     navigate('/');
@@ -73,7 +83,9 @@ function Header() {
     };
 
     const handleVerify = () => {
-        Axios.get("http://localhost:4000/api/auth/verify")
+        Axios.get("https://flavourslabbackend.onrender.com/api/auth/verify",{
+            withCredentials:true
+        })
             .then((res) => {
                 console.log(res.data.status);
                 if (res.data.status) {

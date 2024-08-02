@@ -73,7 +73,7 @@ function Contactus() {
 
         try {
             const response = await Axios.post(
-                "http://localhost:4000/api/form/reservationform",
+                "https://flavourslabbackend.onrender.com/api/form/reservationform",
                 formData
             );
             console.log(response);

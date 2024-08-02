@@ -27,7 +27,7 @@ function Profile() {
 
     useEffect(() => {
         const handleVerify = () => {
-            Axios.get("http://localhost:4000/api/auth/verify")
+            Axios.get("https://flavourslabbackend.onrender.com/api/auth/verify")
                 .then((res) => {
                     // console.log(res.data.status);
                     if (res.data.status) {
