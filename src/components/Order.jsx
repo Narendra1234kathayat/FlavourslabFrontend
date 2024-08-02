@@ -8,7 +8,11 @@ function Order() {
     const [orders, SetOrder] = useState([]);
 
     useEffect(() => {
-        Axios.get('https://flavourslabbackend.onrender.com/api/orders/fetchorder')
+        Axios.get('https://flavourslabbackend.onrender.com/api/orders/fetchorder',{
+            headers:{
+                "authToken":localStorage.getItem("authToken"),
+            }
+        })
             .then((response) => {
                 if (response.data) {
                     SetOrder(response.data);

@@ -17,24 +17,7 @@ function Login() {
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(() => {
-        const handleVerify = async () => {
-            try {
-                const res = await Axios.get('https://flavourslabbackend.onrender.com/api/auth/verify',{
-                    withCredentials:true
-
-                });
-                if (res.data.status) {
-                    navigate('/');
-                } else {
-                    // Handle unauthorized user
-                }
-            } catch (error) {
-                console.log("Error:", error);
-            }
-        };
-        handleVerify();
-    }, []);
+    
 
 
 
@@ -53,11 +36,10 @@ function Login() {
             },{
                 withCredentials: true,
             });
-            console.log(response.data.authToken,"fdsaf")
+            localStorage.setItem("authToken", response.data.authToken);
+            //console.log(response.data.authToken,"fdsaf")
             const tokens=response.data.authToken
             Cookies.set("token",tokens)
-           
-            localStorage.setItem("accesstoken",tokens)
 
             if (response.data.error === "Invalid credentials") {
                 Swal.fire({

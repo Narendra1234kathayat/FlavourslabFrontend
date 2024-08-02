@@ -46,7 +46,12 @@ function Products() {
 
         try {
             const response = await Axios.get(
-                "https://flavourslabbackend.onrender.com/api/auth/verify"
+                "https://flavourslabbackend.onrender.com/api/auth/verify",
+                {
+                    headers:{
+                        "authToken":localStorage.getItem("authToken")
+                    }
+                }
             );
             console.log(response.data)
             // console.log(response)

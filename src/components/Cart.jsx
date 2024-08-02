@@ -34,25 +34,38 @@ function Cart() {
     const dispatch = useDispatch();
     let cartitem = useSelector((state) => state.cart);
     const totalPrice = cartitem.reduce((acc, curr) => acc + (curr.productprice * curr.quantity), 0);
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const response = await Axios.post(
-                    "https://flavourslabbackend.onrender.com/api/auth/getuser"
-                );
-                if (response) {
-                    const user = response.data;
-                } else {
-                   
-                    console.log("Failed to fetch user data");
-                }
-            } catch (error) {
-                navigate('/emptycart')
-                
-            }
-        };
 
-        getUser(); 
+
+    
+    useEffect(() => {
+
+        if(!localStorage.getItem("authToken")) {
+            navigate("/emptycart");
+        }
+        // const getUser = async () => {
+        //     try {
+        //         const response = await Axios.post(
+        //             "https://flavourslabbackend.onrender.com/api/auth/getuser",
+        //             {
+        //                 headers:{
+        //                     "authToken":localStorage.getItem("authToken")
+        //                 }
+        //             }
+
+        //         );
+        //         if (response) {
+        //             const user = response.data;
+        //         } else {
+                   
+        //             console.log("Failed to fetch user data");
+        //         }
+        //     } catch (error) {
+        //         navigate('/emptycart')
+                
+        //     }
+        // };
+
+        // getUser(); 
     }, []); 
 
     const orderData = {
@@ -87,7 +100,11 @@ function Cart() {
             });
         }
         try {
-            const response = await Axios.post('https://flavourslabbackend.onrender.com/api/orders/order', orderData)
+            const response = await Axios.post('https://flavourslabbackend.onrender.com/api/orders/order', orderData,{
+                headers: {
+                    "authToken":localStorage.getItem("authToken")
+                }
+            })
             if (response.data) {
                 console.log(response)
                 Swal.fire({
@@ -114,7 +131,9 @@ function Cart() {
         }
 
         try {
-            const res = await Axios.post('https://flavourslabbackend.onrender.com/api/coupon/verifycoupon', { coupon });
+            const res = await Axios.post('https://flavourslabbackend.onrender.com/api/coupon/verifycoupon', { coupon },
+
+            );
             console.log("Response from server:", res);
 
             if (res.data.error === "no coupon found") {
