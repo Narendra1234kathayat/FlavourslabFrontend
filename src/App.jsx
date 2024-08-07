@@ -2,6 +2,7 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Error from './components/Error.jsx';
 import Home from './components/Home.jsx';
